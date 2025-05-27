@@ -23,12 +23,11 @@ jobs:
         with:
           node-version: '20.x'
 
-      - name: Install dependencies and build
+      - name: Install server dependencies
+        run: npm install
+
+      - name: Install and build client
         run: |
-          # Install server dependencies
-          npm install
-          
-          # Install client dependencies and build
           cd client
           npm install
           npm run build
