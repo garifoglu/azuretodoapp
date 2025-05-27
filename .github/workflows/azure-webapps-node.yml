@@ -23,10 +23,11 @@ jobs:
         with:
           node-version: '20.x'
 
-      - name: npm install, build, and test
+      - name: npm install and build
         run: |
           npm install
-          cd client && npm install
+          cd client
+          npm install
           npm run build
           cd ..
 
@@ -43,7 +44,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: 'Production'
+      name: 'production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
       id-token: write
@@ -70,5 +71,5 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'azuretodoapp'
-          slot-name: 'Production'
+          slot-name: 'production'
           package: . 
